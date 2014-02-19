@@ -3,6 +3,8 @@
 // Katie Aragane, 12371116
 // Kelly Redmond, 12446372
 
+//Edited
+
 public class Board
 {
 	private static final int[] RESET = {0,0,0,0,0,0,5,0,3,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,2,0};	// holds the positions of the starting checkers
