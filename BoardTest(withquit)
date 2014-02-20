@@ -1,0 +1,111 @@
+import java.util.Scanner;
+
+public class BoardTest 
+ {
+
+	public static void main (String[] args) 
+	{
+		Scanner scan = new Scanner(System.in);
+		
+		char letterEntered = scan.next().charAt(0);
+		
+		while (letterEntered != 'q'|| letterEntered != 'Q')
+		{
+		Board gameBoard = new Board();
+		
+		int dieValue;
+		int[] freq;   // ignore index 0 for simplicity
+		Play play = new Play(); 
+		
+		// normal move
+		gameBoard.displayBoard();
+		play.setPlay(24,2,6,2);
+		System.out.println("Expected: X 24-2 6-2");
+		gameBoard.doPlay(Board.X_PLAYER, play);
+		gameBoard.displayBoard();
+		System.out.println("Expected: O 24-2 6-2");
+		gameBoard.doPlay(Board.O_PLAYER, play);
+		gameBoard.displayBoard();
+		
+		// bear off + move
+		play.setPlay(6,6,13,2);
+		System.out.println("Expected: X 6-off 13-2");
+		gameBoard.doPlay(Board.X_PLAYER, play);
+		gameBoard.displayBoard();
+		System.out.println("Expected: O 6-off 13-2");
+		gameBoard.doPlay(Board.O_PLAYER, play);
+		gameBoard.displayBoard();
+		
+		// hit + run
+		play.setPlay(24,3,21,1);
+		System.out.println("Expected: X 24-3 (HIT) 21-1 (MOVE ON)");
+		gameBoard.doPlay(Board.X_PLAYER, play);
+		gameBoard.displayBoard();
+		System.out.println("Expected: O 24-3 (HIT) 21-1 (MOVE ON)");
+		gameBoard.doPlay(Board.O_PLAYER, play);
+		gameBoard.displayBoard();
+		
+		// doubles
+		play.setPlay(22,1,6,1,6,1,6,1);
+		System.out.println("Expected: X 22-1 6-1 6-1 6-1 6-1");
+		gameBoard.doPlay(Board.X_PLAYER, play);
+		gameBoard.displayBoard();
+		System.out.println("Expected: O 22-1 6-1 6-1 6-1 6-1");
+		gameBoard.doPlay(Board.O_PLAYER, play);
+		gameBoard.displayBoard();
+
+		// dance
+		play.setPlay();
+		System.out.println("Expected: X pass");
+		gameBoard.doPlay(Board.X_PLAYER, play);
+		gameBoard.displayBoard();
+		System.out.println("Expected: O pass");
+		gameBoard.doPlay(Board.O_PLAYER, play);
+		gameBoard.displayBoard();		
+		
+		// test single die
+		System.out.println("Expected: uniform distribution 10000/6=1666");
+		freq = new int[] {0,0,0,0,0,0,0};
+		
+		for (int i=0; i<10000; i++) 
+		{
+			dieValue = gameBoard.roll(1)[0];
+			
+			if ((dieValue < 1) || (dieValue > 6)) 
+			{
+				System.out.println("Error");
+			}
+			freq[dieValue] += 1;
+		}
+		
+		for (int i=1; i<=6; i++)  
+		{
+			System.out.println("Frequency of " + i + " is " + freq[i]);
+		}
+
+		// test second die
+		freq = new int[] {0,0,0,0,0,0,0};
+		
+		for (int i=0; i<10000; i++) 
+		{
+			dieValue = gameBoard.roll(2)[1];
+			
+			if ((dieValue < 1) || (dieValue > 6)) 
+			{
+				System.out.println("Error");
+			}
+			freq[dieValue] += 1;
+		}
+		
+		for (int i=1; i<=6; i++)  
+		{
+			System.out.println("Frequency of " + i + " is " + freq[i]);
+		}
+
+		System.out.println("Test Complete");
+		System.exit(0);
+		}
+		
+		System.exit(0);
+	}
+}
