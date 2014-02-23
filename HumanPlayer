@@ -1,0 +1,49 @@
+import java.util.*;
+
+public class HumanPlayer 
+{
+	Scanner scan = new Scanner(System.in);
+	
+	char letterEntered = scan.next().charAt(0);
+	
+		public int quitCommand()
+		{
+			//Scanner scan = new Scanner(System.in);
+			
+			//char letterEntered = scan.next().charAt(0);
+			
+			while (letterEntered != 'q'|| letterEntered != 'Q')
+			{
+				return 1;
+			}
+			
+			System.exit(0);	
+		}
+		
+		public int syntaxCheck()
+		{
+			//Scanner scan = new Scanner(System.in);
+			
+			//char letterEntered = scan.next().charAt(0);
+			
+			int firstMove, secondMove, thirdMove, fourthMove;
+			int firstNum, secondNum, thirdNum, fourthNum;
+			
+			if(firstMove<1||firstMove>24||secondMove<1||secondMove>24||thirdMove<1||thirdMove>24||fourthMove<1||fourthMove>24)
+			{
+				System.out.println("ERROR: Invalid move entry, please re-enter your moves");
+				//returns to where you enter moves here
+			}
+			
+			else if(firstNum<1||firstNum>24||secondNum<1||secondNum>24||thirdNum<1||thirdNum>24||fourthNum<1||fourthNum>24)
+			{
+				System.out.println("ERROR: Invalid move entry, please re-enter your moves");
+				//returns to where you enter moves here
+			}
+			
+			else (letterEntered == '\n')
+			{
+				return 0;
+			}
+		}
+}
