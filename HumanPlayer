@@ -2,15 +2,12 @@ import java.util.*;
 
 public class HumanPlayer 
 {
-	Scanner scan = new Scanner(System.in);
-	
-	char letterEntered = scan.next().charAt(0);
 	
 		public int quitCommand()
 		{
-			//Scanner scan = new Scanner(System.in);
+			Scanner scan = new Scanner(System.in);
 			
-			//char letterEntered = scan.next().charAt(0);
+			char letterEntered = scan.next().charAt(0);
 			
 			while (letterEntered != 'q'|| letterEntered != 'Q')
 			{
@@ -20,30 +17,32 @@ public class HumanPlayer
 			System.exit(0);	
 		}
 		
-		public int syntaxCheck()
+		public void syntaxCheck()
 		{
-			//Scanner scan = new Scanner(System.in);
+			String moveChecker;
+			String[] subString;
 			
-			//char letterEntered = scan.next().charAt(0);
+			Scanner syntaxScan = new Scanner(System.in);
 			
-			int firstMove, secondMove, thirdMove, fourthMove;
-			int firstNum, secondNum, thirdNum, fourthNum;
+			System.out.println("Please enter moves you wish to make: ");
+			moveChecker = syntaxScan.nextLine();
 			
-			if(firstMove<1||firstMove>24||secondMove<1||secondMove>24||thirdMove<1||thirdMove>24||fourthMove<1||fourthMove>24)
+			subString = moveChecker.split("\\s+");
+			
+			if(subString = in.useDelimiter("[1-24]-[1-6]") )
 			{
-				System.out.println("ERROR: Invalid move entry, please re-enter your moves");
-				//returns to where you enter moves here
+				//make move function
 			}
 			
-			else if(firstNum<1||firstNum>24||secondNum<1||secondNum>24||thirdNum<1||thirdNum>24||fourthNum<1||fourthNum>24)
+			else if(subString == "\n")
 			{
-				System.out.println("ERROR: Invalid move entry, please re-enter your moves");
-				//returns to where you enter moves here
+				return;
 			}
 			
-			else (letterEntered == '\n')
+			else
 			{
-				return 0;
+				System.out.println("ERROR: Invalid move entry, please re-enter your moves");
+				//back to re-enter moves function
 			}
 		}
 }
