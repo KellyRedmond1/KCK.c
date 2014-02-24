@@ -45,4 +45,24 @@ public class HumanPlayer
 				//back to re-enter moves function
 			}
 		}
+		
+		public void PassMove()
+		{
+			Scanner passScan = new Scanner(System.in);
+			System.out.println("Would do you like to play or pass?");
+			
+			String playORpass = passScan.nextLine();
+	    
+			if(playORpass == "pass" || playORpass == "Pass||playORpass =="PASS")
+			{
+	    			System.out.println("Next player");
+	    			PassMove();
+			}
+	    
+			else if(playORpass == "play" || playORpass == "Play"||playORpass == "PLAY")
+			{
+				//place move function here
+	    			return;
+			}
+		}	
 }
