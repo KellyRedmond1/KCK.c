@@ -1,0 +1,51 @@
+// Team name: KCK.c
+// Colin Burke, 12340831
+// Katie Aragane, 12371116
+// Kelly Redmond, 12446372
+
+ public class SimpleBoardTest {
+
+	public static void main (String[] args) 
+	{
+		int[][] moveHolder = new int[4][2];
+		int[] dieRollHolder = new int[4];
+		int i = 2;
+		int j = 0;
+		
+		Board gameBoard2 = new Board();
+		Play play = new Play();
+		
+		// roll dice
+		dieRollHolder = gameBoard2.roll(2);	// roll two die and store results in array
+		
+		System.out.println("You rolled: " + dieRollHolder[0] + "," + dieRollHolder[1]);
+		
+		// check if double
+		
+		if(play.checkIfDoubleRoll(dieRollHolder) == true)
+		{
+			i = 4;	// if  double is rolled we have to make four moves in total
+			for(j = 1; j <= i; j++)
+			{
+				HumanPlayer.makeMove(j, moveHolder);
+			}
+			
+		}
+		
+		else
+		{
+			for(j = 1; j <= i; j++)
+			{
+				HumanPlayer.makeMove(j, moveHolder);
+			}
+		
+		}
+		
+	
+		
+	
+		
+		
+	}
+
+}
