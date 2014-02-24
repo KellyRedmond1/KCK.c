@@ -1,0 +1,54 @@
+// Team name: KCK.c
+// Colin Burke, 12340831
+// Katie Aragane, 12371116
+// Kelly Redmond, 12446372
+
+import java.util.Scanner;
+
+
+public class HumanPlayer
+{
+	public static int[][] makeMove(int a, int array[][]) // takes in move number a, and moveHolder array, and returns the array holding the pip and distance
+	{
+		int startPip = 0;
+		int distance = 0;
+		
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.print("Please enter a move in the form: pip-distance: ");
+		String forBarCheck = scan.next();	// takes in a string from the keyboard
+
+		
+		if(forBarCheck.contains("bar"))	// check if the bar was entered
+		{
+			startPip = 25;	// set startPip to 25 
+			forBarCheck = forBarCheck.replaceAll("bar", "25");	// replace the 'off' with 25
+		}
+		
+		if(forBarCheck.contains("off"))	// check if the off was entered
+		{
+			startPip = 0;	// set startPip to 0
+			forBarCheck = forBarCheck.replaceAll("off", "0");	// replace the 'off' with 0
+		}
+		
+		else if((forBarCheck.contains("bar"))||(forBarCheck.contains("off")) == false)	// if the input doesn't contain bar or 0
+		{
+			String[] enteredMove = (forBarCheck).split("-");	// takes in as string and splits up according to the '-' symbol
+			startPip = Integer.parseInt(enteredMove[0]);	// first number is stored in startPip
+			distance = Integer.parseInt(enteredMove[1]);	// second number is stored in distance	
+		}
+		
+		array[a-1][0] = startPip;	// storing the pip in the array
+		array[a-1][1] = distance;	// storing the distance in the array
+	
+		
+		System.out.print("The move you entered was: " + startPip + "-" + distance +"");	// printing just to show the user
+		
+		scan.close();	// closing scanner
+		
+		return array;	// returns the array containing startPip and distance
+		
+	
+	}
+
+}
