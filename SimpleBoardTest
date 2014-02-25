@@ -7,9 +7,9 @@
 
 	public static void main (String[] args) 
 	{
-		int[][] moveHolder = new int[4][2];
-		int[] dieRollHolder = new int[4];
-		int i = 2;
+		int[][] moveHolder = new int[4][2];	// holds the input moves from the user
+		int[] dieRollHolder = new int[4];	// holds the values of the rolled die
+		int i = 2;	
 		int j = 0;
 		
 		Board gameBoard2 = new Board();
@@ -18,16 +18,16 @@
 		// roll dice
 		dieRollHolder = gameBoard2.roll(2);	// roll two die and store results in array
 		
-		System.out.println("You rolled: " + dieRollHolder[0] + "," + dieRollHolder[1]);
+		System.out.println("You rolled a " + dieRollHolder[0] + " and a " + dieRollHolder[1] +"!");
 		
 		// check if double
 		
-		if(play.checkIfDoubleRoll(dieRollHolder) == true)
+		if(play.checkIfDoubleRoll(dieRollHolder) == true)	// if a double is rolled
 		{
 			i = 4;	// if  double is rolled we have to make four moves in total
 			for(j = 1; j <= i; j++)
 			{
-				HumanPlayer.makeMove(j, moveHolder);
+				HumanPlayer.makeMove(j, moveHolder, dieRollHolder);
 			}
 			
 		}
@@ -36,11 +36,12 @@
 		{
 			for(j = 1; j <= i; j++)
 			{
-				HumanPlayer.makeMove(j, moveHolder);
+				HumanPlayer.makeMove(j, moveHolder, dieRollHolder);
 			}
 		
 		}
 		
+	
 	
 		
 	
