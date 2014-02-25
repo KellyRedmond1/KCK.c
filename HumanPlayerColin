@@ -8,30 +8,31 @@ import java.util.Scanner;
 
 public class HumanPlayer
 {
-	public static int[][] makeMove(int a, int array[][]) // takes in move number a, and moveHolder array, and returns the array holding the pip and distance
+	// a is the number of moves, which can be either 2 or 4
+	// inputValsArray is the array to hold the values of the moves input by the user
+	// rolledDieArray is the array which holds the actual values rolled by the dice
+	public static int[][] makeMove(int moveNumber, int inputValsArray[][], int rolledDieArray[]) 
 	{
-		int startPip = 0;
-		int distance = 0;
-		
+		int startPip = 0;	// the pip you want to move from
+		int distance = 0;	// the distance you want to move (must be one of the values rolled on the dice)
+	
 		Scanner scan = new Scanner(System.in);
-		
 		System.out.print("Please enter a move in the form: pip-distance: ");
-				
 		String keyboardInput = scan.next();	// takes in a string from the keyboard	
 		
-		if(keyboardInput.contains("bar"))	// check if the bar was entered
+		if(keyboardInput.contains("bar"))	// check if the word bar was entered
 		{
 			startPip = 25;	// set startPip to 25 
-			keyboardInput = keyboardInput.replaceAll("bar", "25");	// replace the 'off' with 25
+			keyboardInput = keyboardInput.replaceAll("bar", "25");	// replace the 'bar' with '25'
 		}
 		
-		if(keyboardInput.contains("off"))	// check if the off was entered
+		if(keyboardInput.contains("off"))	// check if the word off was entered
 		{
 			startPip = 0;	// set startPip to 0
-			keyboardInput = keyboardInput.replaceAll("off", "0");	// replace the 'off' with 0
+			keyboardInput = keyboardInput.replaceAll("off", "0");	// replace the 'off' with '0'
 		}
 		
-		else if((keyboardInput.contains("bar"))||(keyboardInput.contains("off")) == false)	// if the input doesn't contain bar or 0
+		else if((keyboardInput.contains("bar"))||(keyboardInput.contains("off")) == false)	// if the input doesn't contain 'bar' or 'off'
 		{
 			String[] enteredMove = (keyboardInput).split("-");	// takes in as string and splits up according to the '-' symbol
 		
@@ -39,45 +40,60 @@ public class HumanPlayer
 			distance = Integer.parseInt(enteredMove[1]);	// second number is stored in distance	
 		}
 		
+		inputValsArray[moveNumber-1][0] = startPip;	// store the pip in the array
+		inputValsArray[moveNumber-1][1] = distance;	// store the distance in the array
 		
-		if(HumanPlayer.checkSyntax(startPip, distance) == false)	// check the syntax
+		if(HumanPlayer.checkSyntax(moveNumber, inputValsArray, rolledDieArray) == true)	// check the syntax and whatnot
 		{
-			HumanPlayer.makeMove(a, array);	// call the move method again
+			System.out.println("The move you entered was: " + startPip + "-" + distance +"\n");	// printing just to show the user
 		}
 		
 		else
 		{
-			array[a-1][0] = startPip;	// storing the pip in the array
-			array[a-1][1] = distance;	// storing the distance in the array
-			System.out.println("The move you entered was: " + startPip + "-" + distance +"\n");	// printing just to show the user
+			HumanPlayer.makeMove(moveNumber, inputValsArray, rolledDieArray);
 		}
 	
 		
-		return array;	// returns the array containing startPip and distance
+		return inputValsArray;	// returns the array containing startPip and distance entered by the user
 		
 	}
 
 
-	public static boolean checkSyntax(int start, int dist)	// takes in the entered move numbers and makes sure they're valid
+	public static boolean checkSyntax(int moveNumber, int inputValsArray[][], int rolledDieArray[])	// takes in the entered move numbers and makes sure they're valid
 	{
 		boolean valid = true; 
 		
-		if((start > 25) || (start < 0) || (dist > 6) || (dist < 0))	// if the input stuff isn't between these parameters
+		int moveNumberCopy = moveNumber;
+		
+		if((inputValsArray[moveNumber-1][0] > 25) || (inputValsArray[moveNumber-1][0] < 0))
 		{
-			System.out.print("That is not a valid move. ");
+			System.out.println("You entered an invalid pip value!");
+			valid = false;	
+		}
+		
+		if(moveNumber >= 3)	// for resetting the rolledDieArray to 0 to deal with doubles
+		{
+			moveNumberCopy = 1;
+		}
+		
+		if((inputValsArray[moveNumber-1][1]) != (rolledDieArray[moveNumberCopy-1]))
+		{
+			System.out.println("You did not enter the number you rolled on the dice!");
 			valid = false;
 		}
 		
 		return valid;
+		
+		
 	}
 
 	public static void applyToBoard(Play move, int array[][])	// applies the move to the board
 	{
 		
-		move.setPlay(array[0][0], array[0][1], array[1][0], array[1][1]);	// takes in four moves
+		move.setPlay(array[0][0], array[0][1], array[1][0], array[1][1]);	// takes in two moves
 		
 	}
 	
-										
+	
 }
 
