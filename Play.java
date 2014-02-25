@@ -14,8 +14,16 @@ public class Play
 	public void setPlay(int... setPips)	// a variable number of pips can be the input
 	{
 		int index;
+		for(int i = 0; i<4; i++)
+		{
+			System.out.print("The set pip is: "+ setPips[i] + "\n\n");
+
+			
+		}
 		
+		// WHY IS THIS DIVIDED BY TWO??
 		numMoves = setPips.length/2;	// the input number of pips to move, divided by 2 
+		System.out.print("NUM MOVES IS: " + numMoves);
 		
 		for(index = 0; index < numMoves; index++)
 		{
@@ -38,6 +46,23 @@ public class Play
 	public int length()
 	{
 		return numMoves;	
+	}
+	
+	public boolean checkIfDoubleRoll(int dieRollsArray[])	// how many moves do we need?
+	{
+		boolean doubleRoll = false;
+		
+		if(dieRollsArray[0] == dieRollsArray[1])	// if you rolled a double
+		{
+			doubleRoll = true; // set to true if a double has been rolled
+			System.out.println("You rolled a double!");
+		}
+		
+		else
+		{
+			System.out.println("You did not roll a double!");
+		}
+		return doubleRoll;
 	}
 		
 }
