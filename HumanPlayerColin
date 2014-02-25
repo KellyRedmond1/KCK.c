@@ -6,7 +6,7 @@
 import java.util.Scanner;
 
 
-public class HumanPlayer
+public class HumanPlayer	
 {
 	// a is the number of moves, which can be either 2 or 4
 	// inputValsArray is the array to hold the values of the moves input by the user
@@ -58,8 +58,9 @@ public class HumanPlayer
 		
 	}
 
-
-	public static boolean checkSyntax(int moveNumber, int inputValsArray[][], int rolledDieArray[])	// takes in the entered move numbers and makes sure they're valid
+	// Colin's method to check syntax
+	// takes in the entered move numbers and makes sure they're valid
+	public static boolean checkSyntax(int moveNumber, int inputValsArray[][], int rolledDieArray[])	
 	{
 		boolean valid = true; 
 		
@@ -87,13 +88,74 @@ public class HumanPlayer
 		
 	}
 
-	public static void applyToBoard(Play move, int array[][])	// applies the move to the board
+	public static void applyToBoard(Play move, int array[][])	// Colin's apply to Board method, applies the move to the board
 	{
 		
 		move.setPlay(array[0][0], array[0][1], array[1][0], array[1][1]);	// takes in two moves
 		
 	}
 	
+	public int quitCommand()	// Kelly's quit command method
+	{
+		Scanner scan = new Scanner(System.in);
+
+		char letterEntered = scan.next().charAt(0);
+
+		while (letterEntered != 'q'|| letterEntered != 'Q')
+		{
+			return 1;
+		}
+
+		System.exit(0);	
+	}
 	
+	public void syntaxCheck()	// Katie's syntax checker method
+	{
+		String moveChecker;
+		String[] subString;
+
+		Scanner syntaxScan = new Scanner(System.in);
+
+		System.out.println("Please enter moves you wish to make: ");
+		moveChecker = syntaxScan.nextLine();
+
+		subString = moveChecker.split("\\s+");
+
+		if(subString = in.useDelimiter("[1-24]-[1-6]") )
+		{
+			//make move function
+		}
+
+		else if(subString == "\n")
+		{
+			return;
+		}
+
+		else
+		{
+			System.out.println("ERROR: Invalid move entry, please re-enter your moves");
+			//back to re-enter moves function
+		}
+	}
+	
+	public void PassMove()	// Katie's pass move method
+	{
+		Scanner passScan = new Scanner(System.in);
+		System.out.println("Would do you like to play or pass?");
+
+		String playORpass = passScan.nextLine();
+
+		if(playORpass == "pass" || playORpass == "Pass||playORpass =="PASS")
+		{
+    			System.out.println("Next player");
+    			PassMove();
+		}
+
+		else if(playORpass == "play" || playORpass == "Play"||playORpass == "PLAY")
+		{
+			//place move function here
+    			return;
+		}
+	}	
 }
 
