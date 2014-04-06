@@ -1,0 +1,57 @@
+public class BgOnePlayer {
+	public static void main (String[] args) {
+		
+		Board gameBoard = new Board();
+		Dice gameDice = new Dice();
+		Play currentPlay;
+		RandomPlayer[] player2 = {new RandomPlayer(Board.O_PLAYER_ID), new RandomPlayer(Board.X_PLAYER_ID)};
+		HumanPlayer[] player1 = {new HumanPlayer(Board.X_PLAYER_ID), new HumanPlayer(Board.O_PLAYER_ID)};
+		
+		int winner, currentPlayerId, response;	
+		boolean validPlay = true, finished = false;
+		
+		do {
+			winner = gameDice.rollDieEach();
+			gameDice.displayDieEach();
+		} while (winner == Dice.DRAW);
+		currentPlayerId = winner;
+		
+		do {
+			gameBoard.displayBoard(currentPlayerId);
+			gameDice.rollDice();
+			gameDice.displayDice();
+			do {
+				response = player1[currentPlayerId].getDecision();
+				if (response == HumanPlayer.PLAY) {
+					currentPlay = player1[currentPlayerId].getPlay();
+					validPlay = gameBoard.checkPlay(currentPlayerId, currentPlay, gameDice);
+					if (validPlay) {
+						finished = gameBoard.doPlay(currentPlayerId, currentPlay);
+					}
+				}
+			} while ( (response == HumanPlayer.PLAY) && (!validPlay) ); 
+			currentPlayerId = gameBoard.opposingPlayer(currentPlayerId);
+		} while ( (response != HumanPlayer.QUIT) && (!finished) );
+		
+		do {
+			gameBoard.displayBoard(currentPlayerId);
+			gameDice.rollDice();
+			gameDice.displayDice();
+			do {
+				response = player2[currentPlayerId].getDecision();
+				if (response == RandomPlayer.PLAY) {
+					currentPlay = player2[currentPlayerId].getPlay();
+					validPlay = gameBoard.checkPlay(currentPlayerId, currentPlay, gameDice);
+					if (validPlay) {
+						finished = gameBoard.doPlay(currentPlayerId, currentPlay);
+					}
+				}
+			} while ( (response == RandomPlayer.PLAY) && (!validPlay) ); 
+			currentPlayerId = gameBoard.opposingPlayer(currentPlayerId);
+		} while ( (response != RandomPlayer.QUIT) && (!finished) );
+	
+		System.out.println("Game Complete");
+		
+		return;
+	}	
+ }
