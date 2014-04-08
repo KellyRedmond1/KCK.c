@@ -4,8 +4,8 @@ public class BgOnePlayer {
 		Board gameBoard = new Board();
 		Dice gameDice = new Dice();
 		Play currentPlay;
-		RandomPlayer[] player2 = {new RandomPlayer(Board.O_PLAYER_ID), new RandomPlayer(Board.X_PLAYER_ID)};
-		HumanPlayer[] player1 = {new HumanPlayer(Board.X_PLAYER_ID), new HumanPlayer(Board.O_PLAYER_ID)};
+		RandomPlayer player2 = new RandomPlayer(Board.O_PLAYER_ID);
+		HumanPlayer player1 = new HumanPlayer(Board.X_PLAYER_ID);
 		
 		int winner, currentPlayerId, response;	
 		boolean validPlay = true, finished = false;
